@@ -15,24 +15,41 @@ const Mission1 = {
     morgan: null,
     david: null,
     doorX: 50,
-    doorY: 200,
+    doorY: 280,
 
     davidDialogues: [
-        "Hmm, need to check those reports...",
-        "The API isn't going to fix itself...",
+        "Hmm, this null pointer isn't going to fix itself...",
+        "Why is this test flaky...",
         "Did that PR get merged yet?",
         "Just one more code review...",
-        "I should refactor that module...",
+        "I should refactor this spaghetti...",
+        "Who wrote this code? Oh wait, it was me...",
+        "It works on my machine...",
+        "Let me just add one more console.log...",
+        "Why is prod on fire again...",
+        "Stack Overflow, don't fail me now...",
     ],
-    currentDavidDialogue: null,
-    davidDialogueTimer: 0,
+    morganDialogues: [
+        "The schedule is totally full today...",
+        "I need to call that client back...",
+        "Where did I put those intake forms...",
+        "Table 3 needs new sheets...",
+        "Did that Groupon expire yet...",
+        "Time to restock the massage oils...",
+        "Another 5-star review, nice!",
+        "Is the hot stone warmer on...",
+    ],
+    currentDialogue: null,
+    dialogueTimer: 0,
+    morganMumbleTimer: 0,
 
     init(game) {
         this.eyeContactTime = 0;
         this.completed = false;
         this.morganLooking = false;
-        this.currentDavidDialogue = null;
-        this.davidDialogueTimer = 0;
+        this.currentDialogue = null;
+        this.dialogueTimer = 0;
+        this.morganMumbleTimer = 5;
 
         // Create entities
         this.zyra = new Zyra(this.doorX + 100, this.doorY + 100);
@@ -92,20 +109,33 @@ const Mission1 = {
         const zyraLookingAtDavid = this.zyra.checkEyeContact(this.david);
         const davidLooking = this.david.checkLookingAtZyra(this.zyra);
 
-        if (zyraLookingAtDavid && davidLooking && !this.currentDavidDialogue) {
+        if (zyraLookingAtDavid && davidLooking && !this.currentDialogue) {
             // David says something about work and ignores
-            this.currentDavidDialogue = this.davidDialogues[
+            this.currentDialogue = this.davidDialogues[
                 Math.floor(Math.random() * this.davidDialogues.length)
             ];
-            this.davidDialogueTimer = 2;
-            game.showDialogue('David', this.currentDavidDialogue);
+            this.dialogueTimer = 2.5;
+            game.showDialogue('David', this.currentDialogue);
         }
 
-        // Update David's dialogue timer
-        if (this.davidDialogueTimer > 0) {
-            this.davidDialogueTimer -= dt;
-            if (this.davidDialogueTimer <= 0) {
-                this.currentDavidDialogue = null;
+        // Morgan mumbles to herself occasionally
+        if (!this.currentDialogue) {
+            this.morganMumbleTimer -= dt;
+            if (this.morganMumbleTimer <= 0) {
+                this.currentDialogue = this.morganDialogues[
+                    Math.floor(Math.random() * this.morganDialogues.length)
+                ];
+                this.dialogueTimer = 2.5;
+                this.morganMumbleTimer = 6 + Math.random() * 4;
+                game.showDialogue('Morgan', this.currentDialogue);
+            }
+        }
+
+        // Update dialogue timer
+        if (this.dialogueTimer > 0) {
+            this.dialogueTimer -= dt;
+            if (this.dialogueTimer <= 0) {
+                this.currentDialogue = null;
                 game.hideDialogue();
             }
         }
