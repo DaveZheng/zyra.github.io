@@ -6,11 +6,12 @@ const CONFIG = {
         pixelScale: 4 // For that chunky pixel look
     },
     colors: {
-        // Zyra (assuming she's a golden/tan dog)
+        // Zyra - border collie (black and white)
         zyra: {
-            body: '#d4a574',
-            dark: '#a67c52',
-            light: '#e8c49a'
+            body: '#1a1a1a',      // Black
+            dark: '#0f0f0f',      // Darker black
+            light: '#ffffff',     // White
+            tan: '#d4a574'        // Tan/brown accents
         },
         // Morgan - blonde, white
         morgan: {
@@ -33,14 +34,14 @@ const CONFIG = {
     missions: [
         {
             id: 1,
-            title: 'Mission 1: Eye Contact',
-            description: 'Catch Mom\'s eye for 10 seconds!',
+            title: 'The Staring Contest',
+            description: '???',
             unlocked: true
         },
         {
             id: 2,
-            title: 'Mission 2: Frisbee Time',
-            description: 'Catch frisbees until exhausted!',
+            title: 'Disc-o Fever',
+            description: '???',
             unlocked: false
         }
     ]

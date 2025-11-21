@@ -1,12 +1,78 @@
 // Pixel art sprite drawing utilities
 const Sprites = {
+    // Draw Zyra's face close-up for title screen
+    drawZyraFace(ctx, x, y, scale = 8) {
+        const s = scale;
+        ctx.save();
+        ctx.translate(x, y);
+
+        // Face shape - black sides, white center blaze
+        // Left side black
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(0, 4*s, 8*s, 20*s);
+        // Right side black
+        ctx.fillRect(16*s, 4*s, 8*s, 20*s);
+        // Top black
+        ctx.fillRect(4*s, 0, 16*s, 6*s);
+
+        // White blaze down center
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(8*s, 4*s, 8*s, 20*s);
+
+        // Forehead black patches
+        ctx.fillStyle = '#2a2a2a';
+        ctx.fillRect(6*s, 4*s, 3*s, 4*s);
+        ctx.fillRect(15*s, 4*s, 3*s, 4*s);
+
+        // Eyes - brown/amber like photo
+        ctx.fillStyle = '#8B4513';
+        ctx.fillRect(4*s, 8*s, 4*s, 3*s);
+        ctx.fillRect(16*s, 8*s, 4*s, 3*s);
+        // Eye highlights
+        ctx.fillStyle = '#D2691E';
+        ctx.fillRect(5*s, 9*s, 2*s, 1*s);
+        ctx.fillRect(17*s, 9*s, 2*s, 1*s);
+        // Pupils
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(6*s, 9*s, 2*s, 2*s);
+        ctx.fillRect(18*s, 9*s, 2*s, 2*s);
+
+        // Snout - white/cream
+        ctx.fillStyle = '#f5f5f5';
+        ctx.fillRect(6*s, 14*s, 12*s, 8*s);
+
+        // Pink on snout
+        ctx.fillStyle = '#ffcccc';
+        ctx.fillRect(8*s, 16*s, 8*s, 4*s);
+
+        // Nose - black with pink
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(9*s, 18*s, 6*s, 4*s);
+        ctx.fillStyle = '#4a4a4a';
+        ctx.fillRect(10*s, 19*s, 4*s, 2*s);
+
+        // Whisker dots
+        ctx.fillStyle = '#333';
+        ctx.fillRect(4*s, 17*s, 1*s, 1*s);
+        ctx.fillRect(5*s, 18*s, 1*s, 1*s);
+        ctx.fillRect(18*s, 17*s, 1*s, 1*s);
+        ctx.fillRect(19*s, 18*s, 1*s, 1*s);
+
+        // Ears - floppy black
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillRect(-2*s, 2*s, 6*s, 8*s);
+        ctx.fillRect(20*s, 2*s, 6*s, 8*s);
+
+        ctx.restore();
+    },
+
     // Draw a pixel (scaled)
     pixel(ctx, x, y, color, scale = CONFIG.canvas.pixelScale) {
         ctx.fillStyle = color;
         ctx.fillRect(x * scale, y * scale, scale, scale);
     },
 
-    // Draw Zyra (dog) - simplified pixel art
+    // Draw Zyra (border collie) - black and white with distinctive markings
     drawZyra(ctx, x, y, direction = 'right', frame = 0, state = 'idle') {
         const s = CONFIG.canvas.pixelScale;
         const c = CONFIG.colors.zyra;
@@ -19,50 +85,64 @@ const Sprites = {
             ctx.translate(-32, 0);
         }
 
-        // Body
+        // Body - black base
         ctx.fillStyle = c.body;
         ctx.fillRect(4*s, 8*s, 16*s, 10*s);
 
-        // Darker underside
-        ctx.fillStyle = c.dark;
-        ctx.fillRect(4*s, 14*s, 16*s, 4*s);
+        // White chest/belly
+        ctx.fillStyle = c.light;
+        ctx.fillRect(14*s, 10*s, 6*s, 8*s);
 
-        // Head
+        // Head - black with white blaze
         ctx.fillStyle = c.body;
         ctx.fillRect(18*s, 4*s, 10*s, 10*s);
 
-        // Snout
+        // White blaze down face (like in photo)
+        ctx.fillStyle = c.light;
+        ctx.fillRect(22*s, 4*s, 4*s, 10*s);
+
+        // Snout - white/pink
         ctx.fillStyle = c.light;
         ctx.fillRect(26*s, 8*s, 4*s, 4*s);
+        ctx.fillStyle = '#ffcccc'; // Pink nose area
+        ctx.fillRect(27*s, 10*s, 2*s, 2*s);
 
-        // Nose
+        // Nose - black
         ctx.fillStyle = '#1a1a1a';
         ctx.fillRect(28*s, 9*s, 2*s, 2*s);
 
-        // Eye
-        ctx.fillStyle = '#1a1a1a';
-        ctx.fillRect(24*s, 6*s, 2*s, 2*s);
+        // Eyes - brown like in photo
+        ctx.fillStyle = '#8B4513';
+        ctx.fillRect(20*s, 6*s, 2*s, 2*s);
+        ctx.fillRect(25*s, 6*s, 2*s, 2*s);
 
-        // Ears
-        ctx.fillStyle = c.dark;
-        ctx.fillRect(18*s, 2*s, 4*s, 4*s);
-        ctx.fillRect(24*s, 2*s, 4*s, 4*s);
+        // Ears - black, floppy border collie ears
+        ctx.fillStyle = c.body;
+        ctx.fillRect(17*s, 2*s, 4*s, 5*s);
+        ctx.fillRect(25*s, 2*s, 4*s, 5*s);
 
-        // Tail (wagging based on frame)
+        // Fluffy tail (wagging based on frame) - black with white tip
         const tailOffset = state === 'happy' ? Math.sin(frame * 0.3) * 2 : 0;
         ctx.fillStyle = c.body;
-        ctx.fillRect(0*s, (6 + tailOffset)*s, 4*s, 4*s);
+        ctx.fillRect(0*s, (6 + tailOffset)*s, 5*s, 4*s);
+        ctx.fillStyle = c.light;
+        ctx.fillRect(0*s, (7 + tailOffset)*s, 2*s, 2*s);
 
-        // Legs (animated based on frame)
+        // Legs - white "socks"
         const legOffset = state === 'walking' ? Math.sin(frame * 0.2) * 2 : 0;
-        ctx.fillStyle = c.dark;
-        ctx.fillRect((6 + legOffset)*s, 18*s, 3*s, 6*s);
-        ctx.fillRect((14 - legOffset)*s, 18*s, 3*s, 6*s);
+        ctx.fillStyle = c.body;
+        ctx.fillRect((6 + legOffset)*s, 18*s, 3*s, 4*s);
+        ctx.fillRect((14 - legOffset)*s, 18*s, 3*s, 4*s);
+        ctx.fillStyle = c.light;
+        ctx.fillRect((6 + legOffset)*s, 22*s, 3*s, 2*s);
+        ctx.fillRect((14 - legOffset)*s, 22*s, 3*s, 2*s);
 
         // Sitting pose adjustment
         if (state === 'sitting') {
             ctx.fillStyle = c.body;
             ctx.fillRect(8*s, 14*s, 12*s, 8*s);
+            ctx.fillStyle = c.light;
+            ctx.fillRect(12*s, 16*s, 6*s, 6*s);
         }
 
         ctx.restore();
@@ -144,13 +224,6 @@ const Sprites = {
         ctx.fillStyle = '#1a1a1a';
         ctx.fillRect(8*s, 8*s, 3*s, 2*s);
         ctx.fillRect(13*s, 8*s, 3*s, 2*s);
-
-        // Glasses (optional nerdy touch)
-        ctx.fillStyle = '#374151';
-        ctx.strokeStyle = '#374151';
-        ctx.lineWidth = s;
-        ctx.strokeRect(7*s, 7*s, 5*s, 4*s);
-        ctx.strokeRect(12*s, 7*s, 5*s, 4*s);
 
         // Body/shirt
         ctx.fillStyle = c.clothes;
