@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Press Start 2P', monospace;
+    image-rendering: pixelated;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+#game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    border: 4px solid #4a4a6a;
+    box-shadow: 0 0 20px rgba(100, 100, 150, 0.5);
+}
+
+#game-canvas {
+    display: block;
+    background: #2d2d44;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    color: white;
+    font-size: 10px;
+    font-family: 'Press Start 2P', monospace;
+}
+
+#mission-objective {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+#progress-bar-container {
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+#progress-bar {
+    width: 200px;
+    height: 16px;
+    background: #333;
+    border: 2px solid #666;
+    position: relative;
+    overflow: hidden;
+}
+
+#progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress, 0%);
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    transition: width 0.1s;
+}
+
+#progress-label {
+    display: block;
+    margin-top: 4px;
+    font-size: 8px;
+}
+
+#dialogue-box {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 3px solid #fff;
+    padding: 15px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+#dialogue-speaker {
+    color: #fbbf24;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+}
+
+#mission-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    border: 4px solid #fbbf24;
+    padding: 30px 50px;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+    z-index: 100;
+}
+
+#mission-banner h2 {
+    color: #fbbf24;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+#mission-banner p {
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+#start-screen, #mission-select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1a1a2e 0%, #2d2d44 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 200;
+}
+
+#start-screen h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fbbf24;
+    text-shadow: 4px 4px 0 #000;
+}
+
+.subtitle {
+    font-size: 10px;
+    margin-bottom: 40px;
+    color: #9ca3af;
+    max-width: 400px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+#start-btn, .mission-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    padding: 15px 30px;
+    background: #4ade80;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 4px 4px 0 #000;
+}
+
+#start-btn:hover, .mission-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #000;
+}
+
+#start-btn:active, .mission-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+}
+
+#mission-select h2 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #fbbf24;
+}
+
+#mission-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mission-btn {
+    width: 350px;
+    text-align: left;
+    font-size: 10px;
+    padding: 20px;
+}
+
+.mission-btn.locked {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.mission-btn .mission-title {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #fbbf24;
+}
+
+.mission-btn.locked .mission-title {
+    color: #888;
+}
+
+.hidden {
+    display: none !important;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zyra's Adventures</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="ui-overlay">
+            <div id="mission-banner" class="hidden"></div>
+            <div id="dialogue-box" class="hidden">
+                <span id="dialogue-speaker"></span>
+                <p id="dialogue-text"></p>
+            </div>
+            <div id="hud">
+                <div id="mission-objective"></div>
+                <div id="progress-bar-container" class="hidden">
+                    <div id="progress-bar"></div>
+                    <span id="progress-label"></span>
+                </div>
+            </div>
+        </div>
+        <div id="start-screen">
+            <h1>Zyra's Adventures</h1>
+            <p class="subtitle">A tale of a dog who loves her humans (and hates other dogs)</p>
+            <button id="start-btn">Start Game</button>
+        </div>
+        <div id="mission-select" class="hidden">
+            <h2>Select Mission</h2>
+            <div id="mission-list"></div>
+        </div>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/sprites.js"></script>
+    <script src="js/entities.js"></script>
+    <script src="js/missions/mission1.js"></script>
+    <script src="js/missions/mission2.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
