@@ -24,13 +24,15 @@ const Sprites = {
         ctx.fillRect(6*s, 4*s, 3*s, 4*s);
         ctx.fillRect(15*s, 4*s, 3*s, 4*s);
 
-        // Eyes - brown/amber like photo
-        ctx.fillStyle = '#8B4513';
+        // Eyes - heterochromia: left brown, right blue
+        ctx.fillStyle = '#8B4513'; // Brown left eye
         ctx.fillRect(4*s, 8*s, 4*s, 3*s);
+        ctx.fillStyle = '#3b82f6'; // Blue right eye
         ctx.fillRect(16*s, 8*s, 4*s, 3*s);
         // Eye highlights
         ctx.fillStyle = '#D2691E';
         ctx.fillRect(5*s, 9*s, 2*s, 1*s);
+        ctx.fillStyle = '#60a5fa';
         ctx.fillRect(17*s, 9*s, 2*s, 1*s);
         // Pupils
         ctx.fillStyle = '#000000';
@@ -111,9 +113,10 @@ const Sprites = {
         ctx.fillStyle = '#1a1a1a';
         ctx.fillRect(28*s, 9*s, 2*s, 2*s);
 
-        // Eyes - brown like in photo
-        ctx.fillStyle = '#8B4513';
+        // Eyes - heterochromia: left brown, right blue
+        ctx.fillStyle = '#8B4513'; // Brown
         ctx.fillRect(20*s, 6*s, 2*s, 2*s);
+        ctx.fillStyle = '#3b82f6'; // Blue
         ctx.fillRect(25*s, 6*s, 2*s, 2*s);
 
         // Ears - black, floppy border collie ears

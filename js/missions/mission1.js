@@ -6,7 +6,7 @@ const Mission1 = {
 
     // Mission state
     eyeContactTime: 0,
-    requiredTime: 10,
+    requiredTime: 30,
     morganLooking: false,
     completed: false,
 
